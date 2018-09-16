@@ -1,4 +1,6 @@
-# Reactive database example
+[![Build Status](https://travis-ci.org/Mikbac/Reactive-database-mapping.svg?branch=master)](https://travis-ci.org/Mikbac/Reactive-database-mapping)
+
+# Reactive database mapping example
 
 ## Built With
 * [Slick](http://slick.lightbend.com/) - Functional Relational Mapping for Scala

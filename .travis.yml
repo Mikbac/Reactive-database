@@ -1,4 +1,17 @@
-{
-  "os": "linux",
-  "language": "scala",
-}
+language: scala
+
+dist: trusty
+sudo: false
+
+scala:
+- 2.12.6
+
+jdk:
+- oraclejdk8
+- oraclejdk10
+
+os:
+- linux
+
+notifications:
+  email: false
