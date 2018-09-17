@@ -90,4 +90,6 @@ trait DatabaseSchema {
   }
 
   val orderItems = TableQuery[OrderItems]
+
+  val allSchemas = categories.schema ++ products.schema ++ users.schema ++ orders.schema ++ orderItems.schema
 }
