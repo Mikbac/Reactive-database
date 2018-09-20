@@ -14,9 +14,11 @@ trait InitialData {
   def insertInitialData(): Future[Unit] = {
     val queries = DBIO.seq(
       categories.delete, products.delete, users.delete, orders.delete, orderItems.delete,
-      categories += Category(1, "Vegetables"),
-      categories += Category(2, "Fruits"),
-      categories += Category(3, "Electronics"),
+
+      categories ++= Seq(
+        Category(1, "Vegetables"),
+        Category(2, "Fruits"),
+        Category(3, "Electronics")),
 
       products ++= Seq(
         Product(1, "Tomatoes", 1.99f, 430, 1),
@@ -26,21 +28,26 @@ trait InitialData {
 
       users ++= Seq(
         User(1, "Pawel", "San Francisco", "pawel@mw.com", "123444567"),
-        User(1, "Tom", "Edynburg", "tom@mw.com", "999837460"),
-        User(1, "Daniel", "Glasgow", "daniel@mw.com", "152649604")
+        User(2, "Tom", "Edynburg", "tom@mw.com", "999837460"),
+        User(3, "Daniel", "Glasgow", "daniel@mw.com", "152649604")
       ),
 
       orders ++= Seq(
         Order(id = 1, userId = 1),
         Order(id = 2, userId = 2),
-        Order(id = 3, userId = 3)
+        Order(id = 3, userId = 3),
+        Order(id = 4, userId = 1),
+        Order(id = 5, userId = 3)
       ),
 
       orderItems ++= Seq(
         OrderItem(1, 1, 12, 1),
         OrderItem(2, 2, 32, 2),
         OrderItem(3, 3, 5, 3),
-        OrderItem(4, 2, 6, 3)
+        OrderItem(4, 1, 6, 3),
+        OrderItem(5, 2, 6, 3),
+        OrderItem(6, 3, 6, 3),
+        OrderItem(7, 1, 6, 3)
       ),
 
     )

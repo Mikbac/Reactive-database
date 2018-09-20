@@ -6,7 +6,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.util.Success
-trait Magic {
+
+trait Support {
   self: DatabaseSchema =>
 
   def database: Database
@@ -15,6 +16,7 @@ trait Magic {
     Await.result(f, Duration.Inf).foreach(println)
     println()
   }
+
 
   def createSchemaIfNotExists: Future[Unit] = {
     database.run(MTable.getTables).flatMap(tables =>
