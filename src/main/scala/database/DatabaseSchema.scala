@@ -7,8 +7,6 @@ import domain._
 import slick.jdbc.H2Profile.api._
 
 trait DatabaseSchema {
-  implicit val localDateTimeMapping = MappedColumnType.base[LocalDateTime, Timestamp](
-    localDateTime => Timestamp.from(localDateTime.toInstant(ZoneOffset.UTC)), _.toLocalDateTime)
 
   class Categories(tag: Tag) extends Table[Category](tag, "category") {
 
@@ -48,6 +46,9 @@ trait DatabaseSchema {
 
     def * = (id, name, address, email, phone) <> (User.tupled, User.unapply)
   }
+
+  implicit val localDateTimeMapping = MappedColumnType.base[LocalDateTime, Timestamp](
+    localDateTime => Timestamp.from(localDateTime.toInstant(ZoneOffset.UTC)), _.toLocalDateTime)
 
   class Orders(tag: Tag) extends Table[Order](tag, "order") {
     def user = foreignKey("fk_user", userId, users)(_.id)

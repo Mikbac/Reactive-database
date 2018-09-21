@@ -45,5 +45,14 @@ class Queries(database: Database) extends DatabaseSchema {
     database.run(query.result).map(_.map(OrderWithUser.tupled))
   }
 
+  def finalAllCategories: Future[Seq[Category]] = database.run(categories.result)
+
+  def finalAllProducts: Future[Seq[Product]] = database.run(products.result)
+
+  def finalAllUsers: Future[Seq[User]] = database.run(users.result)
+
+  def finalAllOrders: Future[Seq[Order]] = database.run(orders.result)
+
+  def finalAllOrderItems: Future[Seq[OrderItem]] = database.run(orderItems.result)
 
 }

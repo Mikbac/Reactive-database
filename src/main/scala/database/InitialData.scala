@@ -18,12 +18,15 @@ trait InitialData {
       categories ++= Seq(
         Category(1, "Vegetables"),
         Category(2, "Fruits"),
-        Category(3, "Electronics")),
+        Category(3, "Electronics"),
+        Category(4, "Books")
+      ),
 
       products ++= Seq(
         Product(1, "Tomatoes", 1.99f, 430, 1),
         Product(2, "Apples", 0.99f, 330, 2),
-        Product(3, "TV", 2221.77f, 30, 3)
+        Product(3, "TV", 2221.77f, 30, 3),
+        Product(4, "Smartband", 799.75f, 50, 3)
       ),
 
       users ++= Seq(
@@ -48,7 +51,7 @@ trait InitialData {
         OrderItem(5, 2, 6, 3),
         OrderItem(6, 3, 6, 3),
         OrderItem(7, 1, 6, 3)
-      ),
+      )
 
     )
     database.run(queries)

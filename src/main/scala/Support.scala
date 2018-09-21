@@ -17,6 +17,19 @@ trait Support {
     println()
   }
 
+  def dropSchema: Future[Unit] = {
+    database.run(allSchemas.drop).andThen{
+      case Success(_) => println("Schema dropped")
+    }
+  }
+
+  def createSchema: Future[Unit] = {
+    database.run(MTable.getTables).flatMap(tables =>
+      database.run(allSchemas.create).andThen{
+        case Success(_) => println("Schema created")
+      }
+    )
+  }
 
   def createSchemaIfNotExists: Future[Unit] = {
     database.run(MTable.getTables).flatMap(tables =>

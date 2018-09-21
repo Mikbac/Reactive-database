@@ -9,13 +9,22 @@ object Main extends App with DatabaseSchema with InitialData with Support {
 
   val database = Database.forConfig("conf")
 
-  private val future = createSchemaIfNotExists.flatMap(_ => insertInitialData())
-  Await.ready(future, Duration.Inf)
+  private val drop = dropSchema
+  Await.ready(drop, Duration.Inf)
+
+  private val create = createSchema.flatMap(_ => insertInitialData())
+  Await.ready(create, Duration.Inf)
 
   private val query = new Queries(database)
   printResults(query.productsWithCategories)
   printResults(query.orderItemsWithProducts)
   printResults(query.orderItemsWithOrders)
   printResults(query.ordersWithUsers)
+
+  printResults(query.finalAllCategories)
+  printResults(query.finalAllProducts)
+  printResults(query.finalAllUsers)
+  printResults(query.finalAllOrders)
+  printResults(query.finalAllOrderItems)
 
 }
