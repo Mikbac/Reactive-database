@@ -1,4 +1,4 @@
-import database.{DatabaseSchema, InitialData, Queries}
+import database.{DatabaseSchema, InitialData, Query}
 import slick.jdbc.H2Profile.api._
 
 import scala.concurrent.Await
@@ -15,7 +15,7 @@ object Main extends App with DatabaseSchema with InitialData with Support {
   private val create = createSchema.flatMap(_ => insertInitialData())
   Await.ready(create, Duration.Inf)
 
-  private val query = new Queries(database)
+  private val query = new Query(database)
   printResults(query.productsWithCategories)
   printResults(query.orderItemsWithProducts)
   printResults(query.orderItemsWithOrders)
@@ -27,4 +27,5 @@ object Main extends App with DatabaseSchema with InitialData with Support {
   printResults(query.finalAllOrders)
   printResults(query.finalAllOrderItems)
 
+  printResults(query.countCategoriesByProducts)
 }

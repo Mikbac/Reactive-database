@@ -26,7 +26,13 @@ trait InitialData {
         Product(1, "Tomatoes", 1.99f, 430, 1),
         Product(2, "Apples", 0.99f, 330, 2),
         Product(3, "TV", 2221.77f, 30, 3),
-        Product(4, "Smartband", 799.75f, 50, 3)
+        Product(4, "Smartband", 799.75f, 50, 3),
+        Product(5, "Potatoes", 799.75f, 50, 1),
+        Product(6, "Onions", 799.75f, 50, 1),
+        Product(7, "Cucumbers", 799.75f, 50, 1),
+        Product(8, "Bananas", 799.75f, 50, 2),
+        Product(9, "Oranges", 799.75f, 50, 2),
+        Product(10, "Carrots", 799.75f, 50, 1)
       ),
 
       users ++= Seq(

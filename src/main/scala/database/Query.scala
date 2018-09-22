@@ -6,7 +6,7 @@ import slick.jdbc.H2Profile.api._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class Queries(database: Database) extends DatabaseSchema {
+class Query(database: Database) extends DatabaseSchema {
 
   def productsWithCategories: Future[Seq[ProductWithCategory]] = {
     val query = for {
@@ -54,5 +54,20 @@ class Queries(database: Database) extends DatabaseSchema {
   def finalAllOrders: Future[Seq[Order]] = database.run(orders.result)
 
   def finalAllOrderItems: Future[Seq[OrderItem]] = database.run(orderItems.result)
+
+  def countCategoriesByProducts: Future[Map[String, Int]] = {
+    val talksWithPositiveVotes = for {
+      (t, v) <- categories join products on (_.id === _.categoryId)
+    } yield (t.name, v .id)
+
+    val grouped = talksWithPositiveVotes.groupBy(_._1)
+
+    val counted = grouped.map{ case (title, voteIds) => (title, voteIds.size) }
+
+    val sorted  = counted.sortBy(_._2.desc)
+
+    sorted.result.statements.foreach(println)
+    database.run(sorted.result).map(_.toMap)
+  }
 
 }
