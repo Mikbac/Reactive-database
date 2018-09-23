@@ -42,21 +42,21 @@ trait InitialData {
       ),
 
       orders ++= Seq(
-        Order(id = 1, userId = 1),
-        Order(id = 2, userId = 2),
-        Order(id = 3, userId = 3),
-        Order(id = 4, userId = 1),
-        Order(id = 5, userId = 3)
+        Order(id = 1, userId = 1, status = true),
+        Order(id = 2, userId = 2, status = false),
+        Order(id = 3, userId = 3, status = false),
+        Order(id = 4, userId = 1, status = false),
+        Order(id = 5, userId = 3, status = true)
       ),
 
       orderItems ++= Seq(
-        OrderItem(1, 1, 12, 1),
-        OrderItem(2, 2, 32, 2),
-        OrderItem(3, 3, 5, 3),
-        OrderItem(4, 1, 6, 3),
-        OrderItem(5, 2, 6, 3),
-        OrderItem(6, 3, 6, 3),
-        OrderItem(7, 1, 6, 3)
+        OrderItem(productId = 1, quantity = 12, orderId = 1),
+        OrderItem(productId = 2, quantity = 32, orderId = 2),
+        OrderItem(productId = 3, quantity = 5, orderId = 3),
+        OrderItem(productId = 1, quantity = 6, orderId = 3),
+        OrderItem(productId = 2, quantity = 6, orderId = 3),
+        OrderItem(productId = 3, quantity = 6, orderId = 3),
+        OrderItem(productId = 1, quantity = 6, orderId = 3)
       )
 
     )

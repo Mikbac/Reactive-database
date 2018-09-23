@@ -54,4 +54,17 @@ class QueryTest() extends DatabaseSchema with InitialData with Support {
     printResults(query.countCategoriesByProducts)
   }
 
+  @Test
+  def makeAllOrdersStatusPositiveTest() = {
+    val query = new Query(database)
+    printResults(query.makeAllOrdersStatusPositive.flatMap(_ => query.finalAllOrders))
+  }
+
+  @Test
+  def addOrderItemTest() = {
+    val query = new Query(database)
+    val orderItem = new AddOrderItems(query)
+    printResults(orderItem.add)
+  }
+
 }

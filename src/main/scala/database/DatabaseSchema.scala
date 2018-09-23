@@ -57,9 +57,11 @@ trait DatabaseSchema {
 
     def id = column[Int]("id", O.PrimaryKey)
 
+    def status = column[Boolean]("status")
+
     def date = column[LocalDateTime]("date")
 
-    def * = (id, date, userId) <> (Order.tupled, Order.unapply)
+    def * = (id, date, userId, status) <> (Order.tupled, Order.unapply)
   }
 
   class OrderItems(tag: Tag) extends Table[OrderItem](tag, "order_item") {
@@ -71,11 +73,11 @@ trait DatabaseSchema {
 
     def orderId = column[Int]("order_id")
 
-    def id = column[Int]("id", O.PrimaryKey)
+    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
     def quantity = column[Int]("quantity")
 
-    def * = (id, productId, quantity, orderId) <> (OrderItem.tupled, OrderItem.unapply)
+    def * = (id.?, productId, quantity, orderId) <> (OrderItem.tupled, OrderItem.unapply)
   }
 
   val categories = TableQuery[Categories]

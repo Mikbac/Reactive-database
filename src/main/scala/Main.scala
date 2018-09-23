@@ -28,4 +28,6 @@ object Main extends App with DatabaseSchema with InitialData with Support {
   printResults(query.finalAllOrderItems)
 
   printResults(query.countCategoriesByProducts)
+
+  printResults(query.makeAllOrdersStatusPositive.flatMap(_ => query.finalAllOrders))
 }

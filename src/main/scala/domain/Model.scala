@@ -8,9 +8,9 @@ case class Product(id: Int, name: String, price: Float, quantity: Int, categoryI
 
 case class User(id: Int, name: String, address: String, email: String, phone: String)
 
-case class Order(id: Int, date: LocalDateTime = LocalDateTime.now(), userId: Int)
+case class Order(id: Int, date: LocalDateTime = LocalDateTime.now(), userId: Int, status: Boolean)
 
-case class OrderItem(id: Int, productId: Int, quantity: Int, orderId: Int)
+case class OrderItem(id: Option[Int] = None, productId: Int, quantity: Int, orderId: Int)
 
 case class ProductWithCategory(product: Product, category: Category)
 

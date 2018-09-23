@@ -35,6 +35,11 @@ class Query(database: Database) extends DatabaseSchema {
     database.run(query.result).map(_.map(OrderItemWithOrder.tupled))
   }
 
+  def addOrderItem(orderItem: OrderItem): Future[OrderItem] = {
+    val orderItemsReturningId = orderItems returning orderItems.map(_.id) into ((_, newId) => orderItem.copy(id = Some(newId)))
+    val query = orderItemsReturningId += orderItem
+    database.run(query)
+  }
 
   def ordersWithUsers: Future[Seq[OrderWithUser]] = {
     val query = for {
@@ -69,5 +74,12 @@ class Query(database: Database) extends DatabaseSchema {
     sorted.result.statements.foreach(println)
     database.run(sorted.result).map(_.toMap)
   }
+
+  def makeAllOrdersStatusPositive = {
+    val query = orders.filterNot(_.status).map(_.status).update(true)
+    query.statements.foreach(println)
+    database.run(query)
+  }
+
 
 }
