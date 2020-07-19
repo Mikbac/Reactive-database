@@ -7,7 +7,6 @@ scala:
 - 2.12.6
 
 jdk:
-  - oraclejdk10
   - openjdk10
 
 os:
